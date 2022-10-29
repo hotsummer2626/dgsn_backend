@@ -21,7 +21,6 @@ class Products extends MongoDataSource {
         { name, brand, imgSrc, price, expireDate },
         { new: true }
       )
-      .populate("brand")
       .exec();
   }
   getProductAndDelete(id) {

@@ -43,6 +43,21 @@ const resolvers = {
       return brand;
     },
     async deleteBrand(parent, { id }, { dataSources }) {
+      const products = await dataSources.products.getProducts();
+      if (products.length !== 0) {
+        const brandIdlist = products.reduce(
+          (prev, curr) =>
+            prev.includes(curr.brand._id.toString())
+              ? prev
+              : [...prev, curr.brand._id.toString()],
+          []
+        );
+        if (brandIdlist.includes(id)) {
+          throw new UserInputError(
+            "The brand has been associated with one or more products and cannot be deleted"
+          );
+        }
+      }
       const brand = await dataSources.brands.getBrandAndDelete(id);
       if (!brand) {
         throw new UserInputError("Brand not existed");

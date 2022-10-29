@@ -41,6 +41,7 @@ const resolvers = {
       { dataSources }
     ) {
       const product = await dataSources.products.getProductAndUpdate({
+        id,
         name,
         brand,
         imgSrc,
@@ -50,7 +51,8 @@ const resolvers = {
       if (!product) {
         throw new UserInputError("Product not existed");
       }
-      return product;
+      const newProduct = await dataSources.products.getProductById(product._id);
+      return newProduct;
     },
     async deleteProduct(parent, { id }, { dataSources }) {
       const product = await dataSources.products.getProductAndDelete(id);
