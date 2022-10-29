@@ -8,6 +8,13 @@ const resolvers = {
       const users = await dataSources.users.getUsers();
       return users;
     },
+    async user(parent, { id }, { dataSources }) {
+      const user = await dataSources.users.getUserById(id);
+      if (!user) {
+        throw new UserInputError("User not existed");
+      }
+      return user;
+    },
   },
 
   Mutation: {

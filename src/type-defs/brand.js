@@ -20,11 +20,12 @@ const typeDefs = gql`
 
   type Query {
     brands: [Brand!]
+    brand(id: ID): Brand!
   }
 
   type Mutation {
-    createBrand(brand: CreateBrandData): String
-    updateBrand(brand: UpdataBrandData): String
+    createBrand(brand: CreateBrandData): Brand
+    updateBrand(brand: UpdataBrandData): Brand
     deleteBrand(id: ID): String
   }
 `;

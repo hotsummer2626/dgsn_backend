@@ -38,7 +38,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createProduct(product: CreateProductInput): String
+    createProduct(product: CreateProductInput): Product
     updateProduct(product: UpdateProductInput): Product
     deleteProduct(id: ID): String
   }

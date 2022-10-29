@@ -4,6 +4,9 @@ class Brands extends MongoDataSource {
   getBrands() {
     return this.model.find().exec();
   }
+  getBrandById(id) {
+    return this.findOneById(id);
+  }
   getBrandByName(name) {
     return this.model.findOne({ name }).exec();
   }

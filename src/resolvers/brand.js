@@ -7,6 +7,13 @@ const resolvers = {
       const brands = await dataSources.brands.getBrands();
       return brands;
     },
+    async brand(parent, { id }, { dataSources }) {
+      const brand = await dataSources.brands.getBrandById(id);
+      if (!brand) {
+        throw new UserInputError("Brand not existed");
+      }
+      return brand;
+    },
   },
   Mutation: {
     async createBrand(parent, { brand: { name, imgSrc } }, { dataSources }) {
@@ -14,11 +21,11 @@ const resolvers = {
       if (brand) {
         throw new UserInputError("Brand already existed");
       }
-      await dataSources.brands.saveBrandToDatabase({
+      const newBrand = await dataSources.brands.saveBrandToDatabase({
         name,
         imgSrc,
       });
-      return "SUCCESS";
+      return newBrand;
     },
     async updateBrand(
       parent,
@@ -33,7 +40,7 @@ const resolvers = {
       if (!brand) {
         throw new UserInputError("Brand not existed");
       }
-      return "SUCCESS";
+      return brand;
     },
     async deleteBrand(parent, { id }, { dataSources }) {
       const brand = await dataSources.brands.getBrandAndDelete(id);

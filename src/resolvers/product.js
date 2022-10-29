@@ -25,14 +25,15 @@ const resolvers = {
       if (product) {
         throw new UserInputError("Product already existed");
       }
-      await dataSources.products.saveProductToDatabase({
+      let newProduct = await dataSources.products.saveProductToDatabase({
         name,
         brand,
         imgSrc,
         price,
         expireDate,
       });
-      return "SUCCESS";
+      newProduct = await dataSources.products.getProductById(newProduct._id);
+      return newProduct;
     },
     async updateProduct(
       parent,
