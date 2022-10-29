@@ -4,6 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "pm2 start src/app.js --name dgsn_cms",
+    "poststart": "pm2 log dgsn_cms",
+    "stop": "pm2 stop dgsn_cms",
     "dev": "nodemon src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -25,7 +28,8 @@
     "graphql-upload": "^16.0.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.6.5",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "pm2": "^5.2.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
