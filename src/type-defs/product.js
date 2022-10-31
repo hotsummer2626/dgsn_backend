@@ -12,7 +12,7 @@ const typeDefs = gql`
     name: String!
     brand: Brand
     imgSrc: String
-    price: Float
+    price: String
     expireDate: String
   }
 
@@ -20,7 +20,7 @@ const typeDefs = gql`
     name: String!
     brand: ID!
     imgSrc: String!
-    price: Float!
+    price: String!
     expireDate: String!
   }
 
@@ -29,7 +29,7 @@ const typeDefs = gql`
     name: String!
     brand: ID!
     imgSrc: String!
-    price: Float!
+    price: String!
     expireDate: String!
   }
 
